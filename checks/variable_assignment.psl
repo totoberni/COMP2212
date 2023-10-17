@@ -1,0 +1,17 @@
+
+
+
+
+// Pretty Simple and nice
+x = 4
+x ~= 4
+
+// Okay...
+x = y = 6
+x ~= 6
+y ~= 6
+
+// Oh god
+x = 4 + (y = 6)
+y ~= 6
+x ~= 10

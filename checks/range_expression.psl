@@ -1,0 +1,5 @@
+[a..b] ~= #{OpRange (Identifier "a") (Identifier "b")}
+[a()..b()] ~= #{OpRange (OpInvokation (Identifier "a")) (OpInvokation (Identifier "b"))}
+[a==b..c*4] ~= #{OpRange (OpCompEqual (Identifier "a") (Identifier "b")) (OpMultiply (Identifier "c") (ValNum 4))}
+[!x..y] ~= #{OpRange (OpComparativeNot (Identifier "x")) (Identifier "y")}
+[a&&b..7+a().b()] ~= #{OpRange (OpComparativeAnd (Identifier "a") (Identifier "b")) (OpAdd (ValNum 7) (OpInvokation (OpMemberAccess (OpInvokation (Identifier "a")) (Identifier "b"))))}

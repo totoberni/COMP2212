@@ -1,0 +1,13 @@
+proc empty(tile) {
+    {{0} : (y in 1..length(tile[x]))} : (x in 1..length(tile))
+}
+
+tile = in(1)
+tile_empty = empty(tile)
+
+{
+    switch {
+        case (2 * x < y) ^ (2 * y < x) ^ (2 * y > 2 * 100 - x) ^ (2 * x > 2 * 100 - y) => tile
+        else => tile_empty
+    } : (y in 0..100)
+} : (x in 0..100) //~= in(99)

@@ -1,0 +1,9 @@
+tile = in(1)
+subtile1 = tile[1..6, 1..6]
+subtile2 = tile[3..8, 3..8]
+subtile3 = tile[5..10, 5..10]
+{
+	subtile1, subtile1, subtile1;
+	subtile2, subtile2, subtile2;
+	subtile3, subtile3, subtile3;
+}

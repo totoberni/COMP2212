@@ -1,0 +1,5 @@
+a & b ^ c ~= #{OpLogicalXor (OpLogicalAnd (Identifier "a") (Identifier "b")) (Identifier "c")}
+switch {
+    case (a & b) > 5 => true
+    else => false
+} ~= #{OpSwitch (OpSwitchCase (OpCompGreater (OpLogicalAnd (Identifier "a") (Identifier "b")) (ValNum 5)) (ValBool True) (OpSwitchElse (ValBool False)))}

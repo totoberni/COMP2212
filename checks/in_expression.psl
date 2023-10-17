@@ -1,0 +1,2 @@
+tile = in(1)
+tile ~= switch { else => [0..0] } : (x in [0..0])

@@ -1,0 +1,25 @@
+switch { case (f).y(4, (g.r[7]).y) => (g.h()) else => h()} ~= #{OpSwitch (OpSwitchCase (OpInvokationArgs (OpMemberAccess (Identifier "f") (Identifier "y")) (OpArgumentTree (ValNum 4) (OpArgumentLeaf (OpMemberAccess (OpIndex (OpMemberAccess (Identifier "g") (Identifier "r")) (ValNum 7)) (Identifier "y"))))) (OpInvokation (OpMemberAccess (Identifier "g") (Identifier "h"))) (OpSwitchElse (OpInvokation (Identifier "h"))))}
+switch
+{
+    case (f).y(4, (g.r[7]).y) => (g.h())
+    else => h()
+} ~= #{OpSwitch (OpSwitchCase (OpInvokationArgs (OpMemberAccess (Identifier "f") (Identifier "y")) (OpArgumentTree (ValNum 4) (OpArgumentLeaf (OpMemberAccess (OpIndex (OpMemberAccess (Identifier "g") (Identifier "r")) (ValNum 7)) (Identifier "y"))))) (OpInvokation (OpMemberAccess (Identifier "g") (Identifier "h"))) (OpSwitchElse (OpInvokation (Identifier "h"))))}
+switch { case 1 => 2 case 2 => 3 else => 1 } ~= #{OpSwitch (OpSwitchCase (ValNum 1) (ValNum 2) (OpSwitchCase (ValNum 2) (ValNum 3) (OpSwitchElse (ValNum 1))))}
+switch {
+    case 1 => 2
+    case switch
+        {
+            case 1 => true
+            else => false
+        }  => switch
+        {
+            else => hello
+        }
+    else => 1
+} ~= #{OpSwitch (OpSwitchCase (ValNum 1) (ValNum 2) (OpSwitchCase (OpSwitch (OpSwitchCase (ValNum 1) (ValBool True) (OpSwitchElse (ValBool False)))) (OpSwitch (OpSwitchElse (Identifier "hello"))) (OpSwitchElse (ValNum 1))))}
+(switch { case (1) => (2) case (switch { case 1 => true else => false}) => switch { else => (hello) } else => 1}) ~= #{OpSwitch (OpSwitchCase (ValNum 1) (ValNum 2) (OpSwitchCase (OpSwitch (OpSwitchCase (ValNum 1) (ValBool True) (OpSwitchElse (ValBool False)))) (OpSwitch (OpSwitchElse (Identifier "hello"))) (OpSwitchElse (ValNum 1))))}
+!!!!(switch { case (!1) => (!!2) case (switch { case !!!1 => !!!!!true else => false}) => switch { else => (hello) } else => 1 }) ~= #{OpComparativeNot (OpComparativeNot (OpComparativeNot (OpComparativeNot (OpSwitch (OpSwitchCase (OpComparativeNot (ValNum 1)) (OpComparativeNot (OpComparativeNot (ValNum 2))) (OpSwitchCase (OpSwitch (OpSwitchCase (OpComparativeNot (OpComparativeNot (OpComparativeNot (ValNum 1)))) (OpComparativeNot (OpComparativeNot (OpComparativeNot (OpComparativeNot (OpComparativeNot (ValBool True)))))) (OpSwitchElse (ValBool False)))) (OpSwitch (OpSwitchElse (Identifier "hello"))) (OpSwitchElse (ValNum 1))))))))}
+switch {
+    case (x & 11 != 0) => x * 5
+    else => x + 3
+} : (x in [0..49]) ~= #{OpSwitchAcross "x" (OpSwitchCase (OpCompNotEqual (OpLogicalAnd (Identifier "x") (ValNum 11)) (ValNum 0)) (OpMultiply (Identifier "x") (ValNum 5)) (OpSwitchElse (OpAdd (Identifier "x") (ValNum 3)))) (OpRange (ValNum 0) (ValNum 49))}

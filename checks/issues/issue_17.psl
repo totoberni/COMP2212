@@ -1,0 +1,14 @@
+tile = in(4)
+tile2 = in(1)
+built = {
+    tile, tile2;
+}
+built[1,1] ~= 0
+built[1,2] ~= 0
+built[2,1] ~= 0
+built[2,2] ~= 1
+built[3,1] ~= 0
+built[3,2] ~= 1
+built[4,1] ~= 1
+built[4,2] ~= 0
+built

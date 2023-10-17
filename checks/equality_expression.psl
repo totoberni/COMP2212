@@ -1,0 +1,3 @@
+5 == 8 == false ~= #{OpCompEqual (OpCompEqual (ValNum 5) (ValNum 8)) (ValBool False)}
+4 > 2 == true ~= #{OpCompEqual (OpCompGreater (ValNum 4) (ValNum 2)) (ValBool True)}
+true == 4 > 2 ~= #{OpCompEqual (ValBool True) (OpCompGreater (ValNum 4) (ValNum 2))}

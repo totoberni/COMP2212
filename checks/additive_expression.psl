@@ -1,0 +1,4 @@
+3*9+2/1*2+7 ~= #{OpAdd (OpAdd (OpMultiply (ValNum 3) (ValNum 9)) (OpMultiply (OpDivide (ValNum 2) (ValNum 1)) (ValNum 2))) (ValNum 7)}
+3*9+2 ~= #{OpAdd (OpMultiply (ValNum 3) (ValNum 9)) (ValNum 2)}
+3*9+2/1*2+7 ~= 38
+3*9+2 ~= 29

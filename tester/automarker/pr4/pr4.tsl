@@ -1,0 +1,62 @@
+// =========================
+// Standard Library Functions
+// =========================
+
+proc uapply(tile, function) {
+    {
+        {
+            function(tile[x, y])
+        } : (y in 1..length(left[x]))
+    } : (x in 1..length(left))
+}
+
+proc bapply(left, right, function) {
+    {
+        {
+            function(left[x, y], right[x, y])
+        } : (y in 1..length(left[x]))
+    } : (x in 1..length(left))
+}
+
+proc invert(tile) {
+    {
+        {
+            !tile[x, y]
+        } : (y in 1..length(tile[x]))
+    } : (x in 1..length(tile))
+}
+
+proc and(left, right) {
+    left && right
+}
+
+proc empty(tile) {
+    {
+        {
+            0
+        } : (y in 1..length(tile[x]))
+    } : (x in 1..length(tile))
+}
+
+// =========================
+// Program Start
+// =========================
+
+// Get input tiles
+tile1 = in(1)
+tile2 = in(2)
+//in("tile3")
+tile3 = in(3)
+
+a = bapply(tile1, invert(tile3), and)
+b = bapply(tile2, invert(tile3), and)
+c = empty(tile1)
+
+// Use the tile builder
+{
+	switch {
+        case (y + x < 50 && x < 25) => a
+        case (y <= x && x >= 25) => b
+        else => c
+	} : (y in [0..49])
+} : (x in [0..49])

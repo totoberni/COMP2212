@@ -1,0 +1,2 @@
+a && b ~= #{OpComparativeAnd (Identifier "a") (Identifier "b")}
+a && d == b && c && e ~= #{OpCompEqual (OpComparativeAnd (Identifier "a") (Identifier "d")) (OpComparativeAnd (OpComparativeAnd (Identifier "b") (Identifier "c")) (Identifier "e"))}

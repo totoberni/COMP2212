@@ -1,0 +1,19 @@
+({
+	0, 0;
+	0, 0;
+}) ~= switch { else => switch { else => 0 } : (x in [1..2]) } : (y in [1..2])
+
+tile1 = in(1)
+
+({
+	tile1, tile1;
+	tile1, tile1;
+}) ~= switch { else => switch { else => 0 } : (x in [1..2]) } : (y in [1..2])
+
+({
+	switch { else => [1..2] } : (x in [1..2]);
+})[1..2, 1..2] ~= switch { else => [1..2] } : (x in [1..2])
+
+($({
+	switch { else => [1..2] } : (x in [1..2]);
+}))[1..2, 1..2] ~= switch { else => [1..2] } : (x in [1..2])

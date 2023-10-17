@@ -1,0 +1,9 @@
+tile = in(1)
+// Create the combination
+thing = {
+	tile, tile.mirror_y, blank;
+	blank, tile.mirror_x, tile.mirror_x.mirror_y;
+}
+$({
+	thing, thing.mirror_x;
+})[1..width(tile) * 60, 1..height(tile) * 60]

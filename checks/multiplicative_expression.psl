@@ -1,0 +1,6 @@
+4*3*9 ~= #{OpMultiply (OpMultiply (ValNum 4) (ValNum 3)) (ValNum 9)}
+!!!!!!(!4*!5) ~= #{OpComparativeNot (OpComparativeNot (OpComparativeNot (OpComparativeNot (OpComparativeNot (OpComparativeNot (OpMultiply (OpComparativeNot (ValNum 4)) (OpComparativeNot (ValNum 5))))))))}
+4*!3*9 ~= #{OpMultiply (OpMultiply (ValNum 4) (OpComparativeNot (ValNum 3))) (ValNum 9)}
+4*!(3*9) ~= #{OpMultiply (ValNum 4) (OpComparativeNot (OpMultiply (ValNum 3) (ValNum 9)))}
+3*9/(1*2) ~= #{OpDivide (OpMultiply (ValNum 3) (ValNum 9)) (OpMultiply (ValNum 1) (ValNum 2))}
+3*9/1*2 ~= #{OpMultiply (OpDivide (OpMultiply (ValNum 3) (ValNum 9)) (ValNum 1)) (ValNum 2)}

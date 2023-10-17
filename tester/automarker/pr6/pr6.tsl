@@ -1,0 +1,34 @@
+proc empty(tile) {
+    {{0} : (y in 1..length(tile[x]))} : (x in 1..length(tile))
+}
+// Get inputs
+tile1 = in(1)
+tile2 = in(2)
+tile3 = in(3)
+blnk = empty(tile1)
+
+brick = {
+    tile2, tile3, tile1;
+    tile1, tile2, tile3;
+    tile3, tile1, tile2;
+}
+tl_brick = {
+    blnk, blnk, tile1;
+    blnk, tile2, tile3;
+    tile3, tile1, tile2;
+}
+br_brick = {
+    tile2, tile3, tile1;
+    tile1, tile2, blnk;
+    tile3, blnk, blnk;
+}
+
+// Would rather use the beautiful infinite repeat operator, but since we need special
+// handling for the top left and bottom right, this is easier
+{
+    switch {
+        case x == 1 && y == 1 => tl_brick
+        case x == 20 && y == 20 => br_brick
+        else => brick
+    } : (y in 1..20)
+} : (x in 1..20) //~= in(99) //Uncomment to enable answer verification

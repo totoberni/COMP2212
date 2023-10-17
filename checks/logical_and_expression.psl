@@ -1,0 +1,2 @@
+true == 4 > 2 & false ~= #{OpCompEqual (ValBool True) (OpCompGreater (ValNum 4) (OpLogicalAnd (ValNum 2) (ValBool False)))}
+a & b() & 3 > 6 & a.b * 3 < a.b[5] ~= #{OpCompLess (OpCompGreater (OpLogicalAnd (OpLogicalAnd (Identifier "a") (OpInvokation (Identifier "b"))) (ValNum 3)) (OpLogicalAnd (ValNum 6) (OpMultiply (OpMemberAccess (Identifier "a") (Identifier "b")) (ValNum 3)))) (OpIndex (OpMemberAccess (Identifier "a") (Identifier "b")) (ValNum 5))}

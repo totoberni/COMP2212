@@ -1,0 +1,16 @@
+tile = in(1)
+grid = {
+	tile, rotate_right(tile);
+	rotate_left(tile), rotate_right(rotate_right(tile));
+}
+// New tile building syntax which allows you to define where you are
+// placing things.
+{
+	// Place tiles around the border
+	(1..5, 1) => tile
+	(1..5, 5) => tile
+	(1, 2..4) => tile
+	(5, 2..4) => tile
+	// Place tile * 3 at position 2, 2
+	(2, 2) => tile * 3
+}

@@ -1,0 +1,101 @@
+
+// =====================
+// Functions / Standard Library
+// =====================
+
+proc min(a, b) {
+    switch {
+        case a > b => b
+        else => a
+    }
+}
+
+proc ceiling_div(num, divisor) {
+    a = num % divisor;
+    (num - a) / divisor + (a > 0)
+}
+
+proc sample_xor_list(sample, xs, ys, n) {
+    switch {
+        case n == 0 => 0
+        else => () => {
+            px = xs[n];
+            py = ys[n];
+            (!!sample[px, py]) ^ sample_xor_list(sample, xs, ys, n-1)
+        }
+    }
+}
+
+proc mirror_x(input) {
+    {
+        {
+            input[length(input) - x + 1, y]
+        } : (y in [1..length(input[x])])
+    } : (x in [1..length(input)])
+}
+
+proc mirror_y(input) {
+    {
+        {
+            input[x, length(input[x]) - y + 1]
+        } : (y in [1..length(input[x])])
+    } : (x in [1..length(input)])
+}
+
+// Scale a tile by size units
+proc scale(tile, size) {
+    {
+        {
+            {
+                {
+                    tile[x, y]
+                } : (i in 1..size)
+            } : (j in 1..size)
+        } : (y in 1..length(tile[x]))
+    } : (x in 1..length(tile))
+}
+
+// =====================
+// BEGIN PROGRAM
+// =====================
+
+tile1 = in(1)
+n = length(tile1)
+
+lookup = {
+    switch {
+        case (50 * n - pos + 1) <= scale*n => ceiling_div(pos - (50 * n) + (n * scale), scale)
+        else => 0
+    } : (scale in 1..50)
+} : (pos in 1..50 * n)
+
+output_tile = {
+    // Without this switch the Y axis of the output is inverted
+    switch {
+        switch {
+            switch {
+                () => {
+                    // The minimum of x and y is the number of bricks that we have to deal with
+                    // If its 50, then there are 50 bricks at this position.
+                    // In the top left, there will only ever be 1 brick there.
+                    bricks_here = min(x, y);
+                    // Now we need to work out the position that we need to sample
+                    sample_x = ((x-1)*n+i);
+                    sample_y = ((y-1)*n+j);
+                    x_samples = lookup[sample_x, (51-bricks_here)..50];
+                    y_samples = lookup[sample_y, (51-bricks_here)..50];
+                    sample_xor_list(tile1, x_samples, y_samples, bricks_here)
+                }
+            } : (j in 1..n)
+        } : (i in 1..n)
+    } : (y in 1..50)
+} : (x in 1..50)
+
+big_output = scale(output_tile, 2)
+// Every little helps
+mx = mirror_x(big_output)
+
+{
+    big_output, mx;
+    mirror_y(big_output), mirror_y(mx);
+}

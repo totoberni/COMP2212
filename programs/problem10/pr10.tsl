@@ -1,0 +1,7 @@
+tile1 = in(1)
+tile2 = in(2)
+{
+    tile1[1..12, 1..12], tile1[13..13+length(tile2)-1, 1..12], tile1[13+length(tile2)..length(tile1), 1..12];
+    tile1[1..12, 13..12+length(tile2[1])], tile2, tile1[13+length(tile2)..length(tile1), 13..12+length(tile2[1])];
+    tile1[1..12, 13+length(tile2[1])..length(tile1[1])], tile1[13..13+length(tile2)-1, 13+length(tile2[1])..length(tile1[1])], tile1[13+length(tile2)..length(tile1), 13+length(tile2[1])..length(tile1[1])];
+} //~= in(99) //Uncomment to disable integrated testing

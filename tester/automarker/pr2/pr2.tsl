@@ -1,0 +1,53 @@
+// Scale a tile by size units
+proc scale(tile, size) {
+    {
+        {
+            {
+                {
+                    tile[x, y]
+                } : (i in 1..size)
+            } : (j in 1..size)
+        } : (y in 1..length(tile[x]))
+    } : (x in 1..length(tile))
+}
+
+// Rotate the input 90 degrees left
+proc rotate_left(input) {
+    {
+        {
+            input[length(input) - y + 1, x]
+        } : (y in [1..length(input[x])])
+    } : (x in [1..length(input)])
+}
+
+// Rotate the input 90 degrees to the right
+proc rotate_right(input) {
+    {
+        {
+            input[y, length(input) - x + 1]
+        } : (y in [1..length(input[x])])
+    } : (x in [1..length(input)])
+}
+
+// ===================
+// Actual Program
+// ===================
+
+tile = in(1)
+
+// Create the rotated element grid
+grid = {
+	tile, rotate_right(tile);
+	rotate_left(tile), rotate_right(rotate_right(tile));
+}
+
+// Create long and tall grids
+long_grid = {grid, grid, grid;}
+tall_grid = {grid; grid; grid;}
+
+// Output the final grid
+{
+    grid, long_grid, grid;
+    tall_grid, scale(grid, 3), tall_grid;
+    grid, long_grid, grid;
+}

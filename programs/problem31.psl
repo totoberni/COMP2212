@@ -1,0 +1,9 @@
+// Create the combination
+thing = {
+	in(1), in(1).mirror_y, blank;
+	blank, in(1).mirror_x, in(1).mirror_x.mirror_y;
+}
+// Using repeat functions may make this easier / syntactically nicer
+{
+	(1..10, 1..30) => { thing, thing.mirror_x; }
+}

@@ -1,0 +1,2 @@
+a || b && c ~= #{OpComparativeOr (Identifier "a") (OpComparativeAnd (Identifier "b") (Identifier "c"))}
+a || b || c ~= #{OpComparativeOr (OpComparativeOr (Identifier "a") (Identifier "b")) (Identifier "c")}

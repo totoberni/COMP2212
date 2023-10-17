@@ -1,0 +1,4 @@
+a | b ^ c & d ~= #{OpLogicalOr (Identifier "a") (OpLogicalXor (Identifier "b") (OpLogicalAnd (Identifier "c") (Identifier "d")))}
+a().b().c() | a & b ^ d ~= #{OpLogicalOr (OpInvokation (OpMemberAccess (OpInvokation (OpMemberAccess (OpInvokation (Identifier "a")) (Identifier "b"))) (Identifier "c"))) (OpLogicalXor (OpLogicalAnd (Identifier "a") (Identifier "b")) (Identifier "d"))}
+~a & ~b | ~c ^ d ~= #{OpLogicalOr (OpLogicalAnd (OpLogicalNot (Identifier "a")) (OpLogicalNot (Identifier "b"))) (OpLogicalXor (OpLogicalNot (Identifier "c")) (Identifier "d"))}
+~a & ~b | ~(c ^ d) ~= #{OpLogicalOr (OpLogicalAnd (OpLogicalNot (Identifier "a")) (OpLogicalNot (Identifier "b"))) (OpLogicalNot (OpLogicalXor (Identifier "c") (Identifier "d")))}

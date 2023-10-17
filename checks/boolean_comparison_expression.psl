@@ -1,0 +1,10 @@
+3<5 ~= #{OpCompLess (ValNum 3) (ValNum 5)}
+10>3 ~= #{OpCompGreater (ValNum 10) (ValNum 3)}
+3*9+2>=5 ~= #{OpCompGreaterEqual (OpAdd (OpMultiply (ValNum 3) (ValNum 9)) (ValNum 2)) (ValNum 5)}
+switch { case 2+5 < 8*3-2 => 2*~10 else => 4*2-2+5<10 } <= 2*!6 ~= #{OpCompLessEqual (OpSwitch (OpSwitchCase (OpCompLess (OpAdd (ValNum 2) (ValNum 5)) (OpSubtract (OpMultiply (ValNum 8) (ValNum 3)) (ValNum 2))) (OpMultiply (ValNum 2) (OpLogicalNot (ValNum 10))) (OpSwitchElse (OpCompLess (OpAdd (OpSubtract (OpMultiply (ValNum 4) (ValNum 2)) (ValNum 2)) (ValNum 5)) (ValNum 10))))) (OpMultiply (ValNum 2) (OpComparativeNot (ValNum 6)))}
+a > b < d ~= #{OpCompLess (OpCompGreater (Identifier "a") (Identifier "b")) (Identifier "d")}
+
+3<5 ~= true
+10 > 3 ~= true
+3*9+2 >= 5 ~= true
+!(switch { case 2+5 < 8*3-2 => 2*~10 else => 4*2-2+5 } <= 2*6) ~= false

@@ -1,0 +1,16 @@
+$(a.b) ~= #{OpRepeat (OpMemberAccess (Identifier "a") (Identifier "b"))}
+$(a) ~= #{OpRepeat (Identifier "a")}
+$(a) * b ~= #{OpMultiply (OpRepeat (Identifier "a")) (Identifier "b")}
+c = $(a) * b ~= #{OpAssign (Identifier "c") (OpMultiply (OpRepeat (Identifier "a")) (Identifier "b"))}
+c = $(a().b()) ~= #{OpAssign (Identifier "c") (OpRepeat (OpInvokation (OpMemberAccess (OpInvokation (Identifier "a")) (Identifier "b"))))}
+
+// Passing on 20/04/2023
+tile1 = in(1)
+($(tile1))[1, 1] ~= 0
+($(tile1))[2, 1] ~= 0
+($(tile1))[1, 2] ~= 0
+($(tile1))[2, 2] ~= 0
+($(tile1))[1..1, 1..1] ~= tile1
+
+// Failing on 20/04/2023
+($({ { x + y } : (y in 1..10) } : (x in 1..10)))[2, 1] ~= 3

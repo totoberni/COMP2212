@@ -1,0 +1,16 @@
+// Get input tiles
+tile1 = in(1)
+tile2 = in(2)//in("tile3")
+tile3 = in(3)
+
+// Use the tile builder
+{
+	{
+		switch
+		{
+			case (x + y < 50 && x < 25) => tile1 & ~tile3
+			case (y <= x && x >= 25) => tile2 & ~tile3
+			else => blank
+		}
+	} : (y in [0..49])
+} : (x in [0..49])

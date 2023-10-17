@@ -1,0 +1,16 @@
+proc double(x) {
+    x * 2
+}
+
+double(2) ~= 4
+
+proc mirror_x(input) {
+    {
+        {
+            input[length(input) - x + 1, y]
+        } : (y in [1..length(input[x])])
+    } : (x in [1..length(input)])
+}
+
+tile = in(2)
+mirror_x(tile)

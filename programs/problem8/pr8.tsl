@@ -1,0 +1,66 @@
+// =====================
+// Functions / Standard Library
+// =====================
+
+// Scale a tile by size units
+proc scale(tile, size) {
+    {
+        {
+            {
+                {
+                    tile[x, y]
+                } : (i in 1..size)
+            } : (j in 1..size)
+        } : (y in 1..length(tile[x]))
+    } : (x in 1..length(tile))
+}
+
+proc mirror_x(input) {
+    {
+        {
+            input[length(input) - x + 1, y]
+        } : (y in [1..length(input[x])])
+    } : (x in [1..length(input)])
+}
+
+proc mirror_y(input) {
+    {
+        {
+            input[x, length(input[x]) - y + 1]
+        } : (y in [1..length(input[x])])
+    } : (x in [1..length(input)])
+}
+
+// ===================
+// Actual Program
+// ===================
+
+tlebu = in(1)
+tlebd = mirror_y(tlebu)
+tlegu = in(2)
+tlegd = mirror_y(tlegu)
+bigGreen = scale(tlegu, 2)
+bgTLu = bigGreen[1..length(tlebu), 1..length(tlebu[1])]
+bgTRu = bigGreen[length(tlebu)+1..length(tlebu)*2, 1..length(tlebu[1])]
+bgBLu = bigGreen[1..length(tlebu), length(tlebu)+1..length(tlebu)*2]
+bgBRu = bigGreen[length(tlebu)+1..length(tlebu)*2, length(tlebu)+1..length(tlebu)*2]
+bgTLd = mirror_y(bgBLu)
+bgTRd = mirror_y(bgBRu)
+bgBLd = mirror_y(bgTLu)
+bgBRd = mirror_y(bgTRu)
+
+miniTile = {
+    tlebd, tlebd, tlegd, bgTLd, bgTRd, bgTLd, bgTRd, tlegd, tlegd, bgTLd, bgTRd, bgTLd, bgTRd, tlegd, tlebd, tlebd;
+    tlebd, bgTLu, bgTRu, bgBLd, bgBRd, bgBLd, bgBRd, tlebu, tlebu, bgBLd, bgBRd, bgBLd, bgBRd, bgTLu, bgTRu, tlebd;
+    tlegu, bgBLu, bgBRu, tlegd, bgTLd, bgTRd, tlebu, tlebu, tlebu, tlebu, bgTLd, bgTRd, tlegd, bgBLu, bgBRu, tlegu;
+    tlegd, bgTLd, bgTRd, tlebu, bgBLd, bgBRd, bgTLu, bgTRu, bgTLu, bgTRu, bgBLd, bgBRd, tlebu, bgTLd, bgTRd, tlegd;
+    tlebu, bgBLd, bgBRd, tlebu, tlebu, tlegu, bgBLu, bgBRu, bgBLu, bgBRu, tlegu, tlebu, tlebu, bgBLd, bgBRd, tlebu;
+}
+
+// Create the rotated element grid
+bigTile = {
+	miniTile;
+	mirror_y(miniTile);
+}
+
+$(bigTile)[1..40*length(tlebu), 1..40*length(tlebu)] //~= in(99) //Uncomment to enable answer testing (slow)

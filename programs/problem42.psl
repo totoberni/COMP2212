@@ -1,0 +1,9 @@
+
+{
+    switch
+    {
+        case (x + y < 50 && x < 25) => in(1) & ~in(3)
+        case (row <= col && col >= 25) => in(2) & ~in(3)
+        else => blank
+    }
+} : (x in [0..49], y in [0..49])

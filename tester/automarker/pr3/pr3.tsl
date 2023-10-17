@@ -1,0 +1,33 @@
+proc mirror_x(input) {
+    {
+        {
+            input[length(input) - x + 1, y]
+        } : (y in [1..length(input[x])])
+    } : (x in [1..length(input)])
+}
+
+proc mirror_y(input) {
+    {
+        {
+            input[x, length(input[x]) - y + 1]
+        } : (y in [1..length(input[x])])
+    } : (x in [1..length(input)])
+}
+
+proc empty(tile) {
+    {
+        {
+            0
+        } : (y in 1..length(tile[x]))
+    } : (x in 1..length(tile))
+}
+
+tile = in(1)
+// Create the combination
+thing = {
+	tile, mirror_x(tile), empty(tile);
+	empty(tile), mirror_y(tile), mirror_x(mirror_y(tile));
+}
+$({
+	thing, mirror_y(thing);
+})[1..length(tile) * 60, 1..length(tile[1]) * 60]
