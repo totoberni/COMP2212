@@ -1,3 +1,10 @@
+# Programming Language Concepts coursework
+This repo is a clone of a private repository available here: https://github.com/PowerfulBacon/PLC-Coursework <br>
+The coursework merit marks were distributed amongst the following members in the percentages below:
+
+### Jake Mortlock - 40% 
+### Alberto Berni - 30%
+### Augustas Mirinas - 30%
 
 # Tile Scripting Language
 
